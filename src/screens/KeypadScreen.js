@@ -18,7 +18,7 @@ const KeypadScreen = () => {
             <View className="flex-row my-3 w-full justify-between">
                 <TouchableOpacity
                     className="py-5 bg-gray-600 w-[110px]"
-                    onPress={() => setNumList([...numList, 1])}
+                    onPress={() => setNumList(numList.length >= 4 ? [...numList] : [...numList, 1])}
                 >
                     <Text className="text-white font-semibold text-2xl text text-center">
                         1
@@ -26,7 +26,7 @@ const KeypadScreen = () => {
                 </TouchableOpacity>
                 <TouchableOpacity
                     className="py-5 bg-gray-600 w-[110px]"
-                    onPress={() => setNumList([...numList, 2])}
+                    onPress={() => setNumList(numList.length >= 4 ? [...numList] : [...numList, 2])}
                 >
                     <Text className="text-white font-semibold text-2xl text-center">
                         2
@@ -34,7 +34,7 @@ const KeypadScreen = () => {
                 </TouchableOpacity>
                 <TouchableOpacity
                     className="py-5 bg-gray-600 w-[110px]"
-                    onPress={() => setNumList([...numList, 3])}
+                    onPress={() => setNumList(numList.length >= 4 ? [...numList] : [...numList, 3])}
                 >
                     <Text className="text-white font-semibold text-2xl text-center">
                         3
@@ -44,7 +44,7 @@ const KeypadScreen = () => {
             <View className="flex-row my-3 w-full justify-between">
                 <TouchableOpacity
                     className="py-5 bg-gray-600 w-[110px]"
-                    onPress={() => setNumList([...numList, 4])}
+                    onPress={() => setNumList(numList.length >= 4 ? [...numList] : [...numList, 4])}
                 >
                     <Text className="text-white font-semibold text-2xl text-center">
                         4
@@ -52,7 +52,7 @@ const KeypadScreen = () => {
                 </TouchableOpacity>
                 <TouchableOpacity
                     className="py-5 bg-gray-600 w-[110px]"
-                    onPress={() => setNumList([...numList, 5])}
+                    onPress={() => setNumList(numList.length >= 4 ? [...numList] : [...numList, 5])}
                 >
                     <Text className="text-white font-semibold text-2xl text-center">
                         5
@@ -60,7 +60,7 @@ const KeypadScreen = () => {
                 </TouchableOpacity>
                 <TouchableOpacity
                     className="py-5 bg-gray-600 w-[110px]"
-                    onPress={() => setNumList([...numList, 6])}
+                    onPress={() => setNumList(numList.length >= 4 ? [...numList] : [...numList, 6])}
                 >
                     <Text className="text-white font-semibold text-2xl text-center">
                         6
@@ -70,7 +70,7 @@ const KeypadScreen = () => {
             <View className="flex-row my-3 w-full justify-between">
                 <TouchableOpacity
                     className="py-5 bg-gray-600 w-[110px]"
-                    onPress={() => setNumList([...numList, 7])}
+                    onPress={() => setNumList(numList.length >= 4 ? [...numList] : [...numList, 7])}
                 >
                     <Text className="text-white font-semibold text-2xl text-center">
                         7
@@ -78,7 +78,7 @@ const KeypadScreen = () => {
                 </TouchableOpacity>
                 <TouchableOpacity
                     className="py-5 bg-gray-600 w-[110px]"
-                    onPress={() => setNumList([...numList, 8])}
+                    onPress={() => setNumList(numList.length >= 4 ? [...numList] : [...numList, 8])}
                 >
                     <Text className="text-white font-semibold text-2xl text-center">
                         8
@@ -86,7 +86,7 @@ const KeypadScreen = () => {
                 </TouchableOpacity>
                 <TouchableOpacity
                     className="py-5 bg-gray-600 w-[110px]"
-                    onPress={() => setNumList([...numList, 9])}
+                    onPress={() => setNumList(numList.length >= 4 ? [...numList] : [...numList, 9])}
                 >
                     <Text className="text-white font-semibold text-2xl text-center">
                         9
@@ -97,7 +97,7 @@ const KeypadScreen = () => {
                 <View className="w-[110px]" />
                 <TouchableOpacity
                     className="py-5 bg-gray-600 w-[110px]"
-                    onPress={() => setNumList([...numList, 0])}
+                    onPress={() => setNumList(numList.length >= 4 ? [...numList] : [...numList, 0])}
                 >
                     <Text className="text-white font-semibold text-2xl text-center">
                         0

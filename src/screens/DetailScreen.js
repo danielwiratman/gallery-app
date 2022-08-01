@@ -2,6 +2,7 @@ import { View, Text, Image, StyleSheet, ImageBackground } from "react-native";
 import React from "react";
 import MuseumData from "../data/MuseumData.json";
 import { SafeAreaView } from "react-native-safe-area-context";
+import MusicPlayer from "../components/MusicPlayer";
 
 const DetailScreen = (props) => {
     const { route } = props;
@@ -24,12 +25,15 @@ const DetailScreen = (props) => {
                             marginVertical: 8,
                         }}
                     >
-                        <Text className="text-white" style={{ fontWeight: "bold", fontSize: 16 }}>
+                        <Text className="text-black" style={{ fontWeight: "bold", fontSize: 16 }}>
                             {data.name}
                         </Text>
-                        <Text className="text-white">{data.artist}</Text>
-                        <Text className="text-white">{data.year}</Text>
-                        <Text className="text-white">{data.category}</Text>
+                        <View className="flex-row">
+                            <MusicPlayer />
+                        </View>
+                        <Text className="text-black">{data.artist}</Text>
+                        <Text className="text-black">{data.year}</Text>
+                        <Text className="text-black">{data.category}</Text>
                     </View>
                 </View>
             </SafeAreaView>
@@ -44,7 +48,7 @@ const DetailScreen = (props) => {
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: 'rgba(0,0,0,0.7)',
+        backgroundColor: 'rgba(255,255,255,.7)',
         alignItems: "center",
         justifyContent: 'center',
         padding: 16,
