@@ -3,18 +3,26 @@ import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 
-const KeypadScreen = () => {
+const KeypadScreen = ({navigation}) => {
     const [numList, setNumList] = useState([0]);
 
-    // useEffect(() => {
-    //     console.log(numList);
-    // }, [numList]);
+    useEffect(() => {
+        if (numList.length >= 4){
+            let typedData = numList.slice(1, numList.length).join("")
+            let navigationData = "galery-seni-" + String(typedData)
+            navigation.navigate("Detail", {data: navigationData})
+        }
+    }, [numList]);
 
     return (
         <SafeAreaView className="px-3 flex-1 bg-white justify-center items-center">
-            <Text className="bg-slate-500 w-full text-white text-9xl text-center p-5 pt-10 my-3">
+            {numList.length === 1 ?<Text className="bg-slate-500 w-full text-white text-9xl text-center pt-8 h-40 my-3">
+                0
+            </Text> : 
+            <Text className="bg-slate-500 w-full text-white text-9xl text-center pt-8 h-40 my-3">
                 {numList.slice(1, numList.length).join("")}
             </Text>
+            }
             <View className="flex-row my-3 w-full justify-between">
                 <TouchableOpacity
                     className="py-5 bg-gray-600 w-[110px]"
