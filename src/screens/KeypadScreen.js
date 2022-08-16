@@ -10,7 +10,7 @@ const KeypadScreen = ({navigation}) => {
         if (numList.length >= 4){
             let typedData = numList.slice(1, numList.length).join("")
             let navigationData = "galery-seni-" + String(typedData)
-            navigation.navigate("Detail", {data: navigationData})
+            navigation.navigate("Detail")
         }
     }, [numList]);
 

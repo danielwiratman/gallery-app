@@ -18,7 +18,7 @@ const ScanScreen = ({ navigation }) => {
     const handleBarCodeScanned = ({ type, data }) => {
         console.log("Type: " + type + "\nData: " + data);
         if (data !== "") {
-            navigation.navigate("Detail", { data: data });
+            navigation.navigate("Detail");
         }
     };
 

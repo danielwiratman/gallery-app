@@ -10,11 +10,10 @@ import { Audio } from "expo-av";
 import { FontAwesome } from "@expo/vector-icons";
 import * as FileSystem from "expo-file-system";
 import Slider from "@react-native-community/slider";
+import { makeIntoUrl } from "../constants";
 
-const API_URL =
-    "https://b586-2001-448a-5020-5e08-cda0-2616-a03e-b922.ap.ngrok.io";
 
-const MusicPlayer = ({ url }) => {
+const MusicPlayer = ({ url, name }) => {
     const [playing, setPlaying] = useState();
     const [downloadProgress, setDownloadProgress] = useState();
     const [downloading, setDownloading] = useState(false);
@@ -37,11 +36,11 @@ const MusicPlayer = ({ url }) => {
 
     async function fetchData() {
         const dir = await readDir();
-        if (dir.indexOf("loveofgod.mp3") !== -1) {
+        if (dir.indexOf(name) !== -1) {
             setDownloaded(true);
             setDownloading(false);
             loadAudio({
-                uri: FileSystem.documentDirectory + "loveofgod.mp3",
+                uri: FileSystem.documentDirectory + name,
             });
         } else {
             setDownloaded(false);
@@ -69,9 +68,10 @@ const MusicPlayer = ({ url }) => {
     }
 
     async function downloadAudio(sourceUrl) {
+        console.log(sourceUrl)
         const resumableDownload = FileSystem.createDownloadResumable(
             sourceUrl,
-            FileSystem.documentDirectory + "loveofgod.mp3",
+            FileSystem.documentDirectory + name,
             {},
             (prog) => {
                 const progress =
@@ -145,8 +145,7 @@ const MusicPlayer = ({ url }) => {
                 ) : (
                     <TouchableOpacity
                         onPress={() => {
-                            const downloadUrl = API_URL + url;
-                            downloadAudio(downloadUrl);
+                            downloadAudio(makeIntoUrl(url));
                         }}
                     >
                         <FontAwesome name="download" size={24} color="black" />
@@ -181,9 +180,9 @@ const MusicPlayer = ({ url }) => {
                         await sound.current.unloadAsync();
                     }
                     const dir = await readDir();
-                    if (dir.indexOf("loveofgod.mp3") !== -1) {
+                    if (dir.indexOf(name) !== -1) {
                         await FileSystem.deleteAsync(
-                            FileSystem.documentDirectory + "loveofgod.mp3"
+                            FileSystem.documentDirectory + name
                         );
                         setDownloaded(false);
                         setSeek(0);
