@@ -15,15 +15,30 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Entypo } from "@expo/vector-icons";
 import { API_URL, makeIntoUrl } from "../constants";
 
-
 const HomeScreen = ({ navigation }) => {
     const [searchBoxVal, setSearchBoxVal] = useState("");
     const { width: scrWidth, height: scrHeight } = Dimensions.get("window");
     const [allData, setAllData] = useState([]);
+    const [filteredData, setFilteredData] = useState([]);
 
     useEffect(() => {
         fetchFromApi();
     }, []);
+
+    function handleSearch(input) {
+        let text = input.toLowerCase();
+        let filteredName = allData.filter((item) => {
+            return item.attributes.title.toLowerCase().match(text);
+        });
+
+        if (!text || text === "") {
+            setFilteredData(allData);
+        } else if (!Array.isArray(filteredName) && !filteredName.length) {
+            setFilteredData([]);
+        } else if (Array.isArray(filteredName)) {
+            setFilteredData(filteredName);
+        }
+    }
 
     useEffect(() => {
         console.log("Total Item Count: " + allData.length);
@@ -35,6 +50,7 @@ const HomeScreen = ({ navigation }) => {
         const arrayData = jsonData.data;
 
         setAllData(arrayData);
+        setFilteredData(arrayData);
     }
 
     return (
@@ -72,8 +88,7 @@ const HomeScreen = ({ navigation }) => {
                     <View className="mx-5 bg-white p-3 flex-row items-center">
                         <TextInput
                             className="flex-1 text-lg"
-                            value={searchBoxVal}
-                            onChange={(e) => setSearchBoxVal(e)}
+                            onChangeText={(e) => handleSearch(e)}
                         />
                         <TouchableOpacity onPress={() => setSearchBoxVal("")}>
                             <Entypo name="cross" size={28} color="#888" />
@@ -81,26 +96,26 @@ const HomeScreen = ({ navigation }) => {
                     </View>
                     <View style={{ height: 30 }} />
 
-                    {allData.map((item) => {
+                    {filteredData.map((item) => {
                         return (
                             <TouchableOpacity
-                                key={item.attributes.serial}
+                                key={item.attributes.ref_name}
                                 className="flex-row p-3 mx-5 my-2 bg-white "
-                                onPress={(() => {
-                                  navigation.navigate('Detail', item)
-                                })}
+                                onPress={() => {
+                                    navigation.navigate("Detail", item);
+                                }}
                             >
                                 <Image
                                     className="aspect-square"
                                     source={{
                                         uri: makeIntoUrl(
-                                            item.attributes.images.data[0]
+                                            item.attributes.image.data
                                                 .attributes.formats.thumbnail
                                                 .url
                                         ),
                                     }}
                                 />
-                                <View style={{width: 10}} />
+                                <View style={{ width: 10 }} />
                                 <View>
                                     <Text className="font-semibold text-base">
                                         {item.attributes.title}

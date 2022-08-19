@@ -12,7 +12,6 @@ import * as FileSystem from "expo-file-system";
 import Slider from "@react-native-community/slider";
 import { makeIntoUrl } from "../constants";
 
-
 const MusicPlayer = ({ url, name }) => {
     const [playing, setPlaying] = useState();
     const [downloadProgress, setDownloadProgress] = useState();
@@ -36,6 +35,7 @@ const MusicPlayer = ({ url, name }) => {
 
     async function fetchData() {
         const dir = await readDir();
+        console.log(dir);
         if (dir.indexOf(name) !== -1) {
             setDownloaded(true);
             setDownloading(false);
@@ -68,7 +68,7 @@ const MusicPlayer = ({ url, name }) => {
     }
 
     async function downloadAudio(sourceUrl) {
-        console.log(sourceUrl)
+        console.log(sourceUrl);
         const resumableDownload = FileSystem.createDownloadResumable(
             sourceUrl,
             FileSystem.documentDirectory + name,
